@@ -1,0 +1,228 @@
+[
+  {
+    "id": "MITRE-T1566.002",
+    "title": "Brand Impersonation & Typosquatting",
+    "category": "Brand Impersonation",
+    "domain": "website",
+    "attack_vector": "Credential Harvesting & Visual Deception",
+    "mitre_technique": "T1566.002 Spearphishing Link",
+    "text": "brand impersonation typosquatting fake domain spoofing chase paypal bankofamerica apple google microsoft netflix amazon binance metamask credential harvesting login portal deceptive host",
+    "description": "Adversaries register domains mimicking well-known financial institutions, cloud services, and tech providers using subtle typographical modifications, hyphen additions, or deceptive second-level domains to mislead victims into submitting credentials or sensitive data.",
+    "recommended_actions": [
+      "Block the deceptive domain at corporate DNS resolvers and perimeter firewalls.",
+      "Submit the malicious URL to Google Safe Browsing and APWG (Anti-Phishing Working Group).",
+      "Always navigate to trusted services via official browser bookmarks or verified mobile apps."
+    ]
+  },
+  {
+    "id": "MITRE-T1566.003",
+    "title": "Subdomain Stacking & Domain Masking",
+    "category": "Domain Architecture",
+    "domain": "website",
+    "attack_vector": "Visual Deception & Authority Hijacking",
+    "mitre_technique": "T1566.002 Spearphishing Link",
+    "text": "subdomain stacking domain masking fake subdomain prefix suffix deceptive hierarchy paypal.com.attacker.com chase.com.verify.net multiple dots deep subdomain",
+    "description": "Adversaries construct deceptive multi-level subdomains where the target brand name is placed at the beginning of the domain string (e.g. paypal.com.account-update.xyz) to exploit mobile URL truncations and deceive users who inspect only the start of the host.",
+    "recommended_actions": [
+      "Inspect the root domain directly preceding the public suffix (e.g., '.xyz' or '.com') rather than leading subdomains.",
+      "Enforce DNS inspection tools that flag multi-tier subdomains containing trusted brand trademarks."
+    ]
+  },
+  {
+    "id": "CISA-TA15-119A",
+    "title": "Insecure Transport / Absence of TLS Encryption",
+    "category": "Transport Security",
+    "domain": "website",
+    "attack_vector": "Man-In-The-Middle (MITM) & Eavesdropping",
+    "mitre_technique": "T1040 Network Sniffing",
+    "text": "http unencrypted plain text no ssl no tls missing certificate cleartext credential transmission login password input",
+    "description": "The destination URL transmits network traffic over unencrypted HTTP (port 80). Legitimate financial institutions, payment gateways, and modern authentication providers enforce HTTPS with TLS 1.3 and HSTS. Any login or verification endpoint using unencrypted HTTP is an immediate hazard.",
+    "recommended_actions": [
+      "Never enter login credentials, one-time passcodes, or banking data on non-HTTPS sites.",
+      "Enable 'HTTPS-Only Mode' in your browser settings to automatically block unencrypted HTTP fallback."
+    ]
+  },
+  {
+    "id": "MITRE-T1071.001",
+    "title": "Direct IP Hostname Abuse",
+    "category": "Infrastructure Obfuscation",
+    "domain": "website",
+    "attack_vector": "Domain Reputation Evasion",
+    "mitre_technique": "T1071.001 Web Protocols",
+    "text": "direct ip address ipv4 host numeric host 192.168 raw ip login webscr bypass domain reputation fast flux",
+    "description": "Adversaries embed raw IPv4 or IPv6 addresses directly into URLs rather than registered domain names. This tactic evades domain-level reputation feeds, eliminates domain registration costs, and frequently points directly to compromised hosting servers or temporary staging VPS instances.",
+    "recommended_actions": [
+      "Restrict outbound network traffic to raw external IP addresses for standard HTTP/HTTPS browsing.",
+      "Flag any authentication prompt hosted on a numeric IP address as critical severity."
+    ]
+  },
+  {
+    "id": "APWG-SHORTENER-01",
+    "title": "URL Shortener Cloaking & Redirection Chains",
+    "category": "URL Obfuscation",
+    "domain": "website",
+    "attack_vector": "Automated Gateway Evasion",
+    "mitre_technique": "T1027 Obfuscated/Compressed Information",
+    "text": "url shortener bit.ly tinyurl t.co is.gd ow.ly redirection chain cloaking mask destination bypass mail filter",
+    "description": "Malicious actors leverage free URL shortening and redirect services to mask suspicious destinations, defeat static content filters in email security gateways, and prevent endpoint link previews from rendering the true landing page.",
+    "recommended_actions": [
+      "Use URL unshortening and expansion utilities before opening unfamiliar shortened links.",
+      "Deploy email gateway policies that automatically resolve and inspect recursive redirect chains."
+    ]
+  },
+  {
+    "id": "MITRE-T1568.002",
+    "title": "High-Entropy / DGA Infrastructure",
+    "category": "Algorithmic Evasion",
+    "domain": "website",
+    "attack_vector": "Resilient Malicious Infrastructure",
+    "mitre_technique": "T1568.002 Domain Generation Algorithms",
+    "text": "high entropy random characters dga domain generation algorithm disposable domain shannon entropy obscure tld",
+    "description": "Domains with abnormally high Shannon character entropy or pseudo-random naming patterns typically originate from automated Domain Generation Algorithms. Threat actors spin up hundreds of transient disposable domains daily to maintain resilient attack infrastructure.",
+    "recommended_actions": [
+      "Implement DNS firewall rules that query newly registered domains (NRDs) and high-entropy hostnames.",
+      "Block traffic to high-risk free top-level domains (.tk, .ml, .cf, .gq) unless explicitly required."
+    ]
+  },
+  {
+    "id": "CISA-SOCENG-01",
+    "title": "Urgency & Account Suspension Traps",
+    "category": "Social Engineering",
+    "domain": "general",
+    "attack_vector": "Coercive Psychological Urgency",
+    "mitre_technique": "T1598 Phishing for Information",
+    "text": "urgent account suspended verify password reset appeal resolution security alert action required revalidate confirm billing",
+    "description": "The communication explicitly incorporates high-pressure urgency keywords designed to trigger panic in recipients. Attackers construct landing pages falsely claiming account suspension, unauthorized charges, or required security updates to bypass user caution.",
+    "recommended_actions": [
+      "Treat all unsolicited urgent alerts with heightened skepticism.",
+      "Verify account status directly through official mobile apps or customer service phone numbers listed on the back of payment cards."
+    ]
+  },
+  {
+    "id": "NIST-SP800-63B",
+    "title": "Legitimate Enterprise Web Baseline",
+    "category": "Safe Baseline",
+    "domain": "website",
+    "attack_vector": "Compliant Standard Architecture",
+    "mitre_technique": "Benign Operational Infrastructure",
+    "text": "legitimate safe valid https tls verified domain standard hierarchy expected architecture benign",
+    "description": "The target domain adheres to recognized enterprise web security standards, including enforced TLS encryption, consistent second-level domain naming, standard public TLDs, and absence of deceptive brand-impersonation indicators.",
+    "recommended_actions": [
+      "Ensure your browser displays a valid TLS certificate issued to the intended organization.",
+      "Maintain active MFA (preferably FIDO2/WebAuthn hardware keys) to remain resilient against zero-day phishing."
+    ]
+  },
+  {
+    "id": "MITRE-T1566.001",
+    "title": "SMS Phishing (Smishing) & Fake Bank Alerts",
+    "category": "Mobile Fraud",
+    "domain": "sms_email",
+    "attack_vector": "SMS Mobile Social Engineering",
+    "mitre_technique": "T1566.002 Spearphishing Link",
+    "text": "smishing sms bank alert account suspended wells fargo chase unauthorized activity card blocked verify immediately text message",
+    "description": "Adversaries send deceptive SMS messages posing as banks, card issuers, or government agencies claiming unauthorized debit card activity or account suspension. The message embeds a deceptive link or callback number to harvest credentials or 2FA codes.",
+    "recommended_actions": [
+      "Forward suspicious SMS text messages to 7726 (SPAM) to notify mobile carriers.",
+      "Do NOT click any embedded links in unsolicited SMS messages; log into banking apps directly.",
+      "Contact your financial institution using the verified phone number printed on the back of your card."
+    ]
+  },
+  {
+    "id": "FTC-PRIZE-01",
+    "title": "Lottery, Giveaway & Fake Gift Card Scams",
+    "category": "Financial Fraud",
+    "domain": "sms_email",
+    "attack_vector": "Advance-Fee & Prize Fraud",
+    "mitre_technique": "T1598 Phishing for Information",
+    "text": "congratulations won prize gift card walmart claim prize free lottery winner claim now advance fee scam",
+    "description": "Scammers notify recipients that they have won an expensive prize, gift card, or lottery jackpot. To claim the reward, victims are coerced into paying an 'activation fee' or submitting personal and banking data.",
+    "recommended_actions": [
+      "Legitimate sweepstakes never require a processing fee, shipping payment, or bank credentials to claim a prize.",
+      "Block the sender's phone number or email address immediately and report to FTC ReportFraud.ftc.gov."
+    ]
+  },
+  {
+    "id": "CISA-COURIER-01",
+    "title": "Package Delivery & Courier Impersonation",
+    "category": "Courier Scams",
+    "domain": "sms_email",
+    "attack_vector": "Delivery Fee & Address Lure",
+    "mitre_technique": "T1566.002 Spearphishing Link",
+    "text": "fedex dhl usps package delivery failed shipment tracking incorrect address update details redelivery fee",
+    "description": "Attackers pose as major postal and courier services (FedEx, USPS, DHL, UPS) stating a parcel could not be delivered due to an incomplete address or unpaid customs tariff. The victim is directed to a payment card harvesting portal.",
+    "recommended_actions": [
+      "Track parcels exclusively on official courier websites by typing the tracking code manually.",
+      "Be aware that legitimate couriers do not require gift cards or wire transfers for redelivery."
+    ]
+  },
+  {
+    "id": "FBI-IC3-BEC",
+    "title": "Business Email Compromise (BEC) & Wire Fraud",
+    "category": "Corporate Fraud",
+    "domain": "sms_email",
+    "attack_vector": "Executive & Vendor Impersonation",
+    "mitre_technique": "T1598 Phishing for Information",
+    "text": "invoice payment wire transfer updated bank account urgent payment vendor ceo transfer funds bank details payroll",
+    "description": "Sophisticated threat actors impersonate corporate executives or established vendors, requesting urgent changes to bank wire instructions or fraudulent invoice settlement.",
+    "recommended_actions": [
+      "Implement mandatory dual-custody verification (out-of-band phone call) for any wire payment request or routing change.",
+      "Enforce DMARC (reject policy), DKIM, and SPF across all corporate email gateways."
+    ]
+  },
+  {
+    "id": "NIST-CLEAN-MSG",
+    "title": "Legitimate Notification & Communication Baseline",
+    "category": "Safe Baseline",
+    "domain": "sms_email",
+    "attack_vector": "Authentic Communication",
+    "mitre_technique": "Benign Operational Message",
+    "text": "legitimate meeting sync calendar reminder quarterly roadmap team conference normal conversation authentic clean",
+    "description": "The message exhibits standard conversational or internal corporate notification characteristics with zero coercive urgency, prize lures, or deceptive credential harvesting links.",
+    "recommended_actions": [
+      "Follow standard organizational communication hygiene and report unexpected changes in email tone."
+    ]
+  },
+  {
+    "id": "ICAO-DOC-9303",
+    "title": "Digital Image Tampering & Splicing",
+    "category": "Visual Forgery",
+    "domain": "document",
+    "attack_vector": "Image Manipulation & Copy-Paste Forgery",
+    "mitre_technique": "T1565.001 Stored Data Manipulation",
+    "text": "document tampering image splicing copy paste clone stamp altered text forged id passport modified numbers photoshop",
+    "description": "Digital documents and identification papers exhibit pixel-level anomalies, Error Level Analysis (ELA) inconsistencies, or unnatural edge boundaries where text, facial portraits, or numbers were digitally spliced or cloned.",
+    "recommended_actions": [
+      "Perform Error Level Analysis (ELA) and double-compression artifact analysis on the submitted file.",
+      "Request original uncompressed vector PDF documents or physical notarized credentials for high-risk identity validation.",
+      "Cross-check Machine Readable Zone (MRZ) checksums against visual zone OCR strings."
+    ]
+  },
+  {
+    "id": "ENISA-ID-FRAUD",
+    "title": "Typography, Font & Alignment Inconsistencies",
+    "category": "Document Integrity",
+    "domain": "document",
+    "attack_vector": "Synthetic Field Insertion",
+    "mitre_technique": "T1565.001 Stored Data Manipulation",
+    "text": "font mismatch irregular kerning alignment artifact uneven baseline resolution mismatch inserted characters altered date",
+    "description": "Forgers frequently lack access to proprietary enterprise or government font faces. Tampered fields display mismatched font weights, irregular kerning, uneven baselines, or resolution differences compared to surrounding document text.",
+    "recommended_actions": [
+      "Inspect sub-pixel character baselines and font rendering smoothing filters across numeric fields.",
+      "Compare suspect document against verified reference templates for exact millimeter geometry."
+    ]
+  },
+  {
+    "id": "ISO-27001-DOC",
+    "title": "Authentic Document Verification Baseline",
+    "category": "Safe Baseline",
+    "domain": "document",
+    "attack_vector": "Authentic Certified Document",
+    "mitre_technique": "Benign Document Baseline",
+    "text": "authentic document legitimate passport id driver license consistent font uniform noise valid mrz genuine",
+    "description": "The uploaded document demonstrates consistent visual noise distributions, uniform font geometry, correct optical layout, and standard security background patterns without detected tampering signatures.",
+    "recommended_actions": [
+      "Store encrypted archival copy for compliance and audit trail records.",
+      "Verify digital cryptographic certificates if document incorporates PDF digital signatures."
+    ]
+  }
+]
